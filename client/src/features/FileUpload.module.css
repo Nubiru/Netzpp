@@ -9,3 +9,33 @@
 .text {
   text-align: center;
 }
+
+.button {
+  border: none;
+  margin-left: 0.5rem;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: #218838;
+  }
+  &:disabled {
+    background-color: grey;
+    cursor: default;
+  }
+}
+
+.label {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #01330d;
+  color: white;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}

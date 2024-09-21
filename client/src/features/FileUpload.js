@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import toast from 'react-hot-toast'
 import axios from 'axios'
 import classes from './FileUpload.module.css'
 import { getList } from '../helpers/getList.js'
@@ -11,8 +12,12 @@ const FileUpload = ({
   setFolders,
   folderPath
 }) => {
+  //added loading state
+  const [loading, setLoading] = useState(false)
+
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
     console.log('1', file)
     const formData = new FormData()
     formData.append('file', file)
@@ -29,10 +34,14 @@ const FileUpload = ({
           }
         }
       )
+      toast.success('File uploaded successfuly')
+      setLoading(false)
       console.log('4', response.data)
     } catch (error) {
+      setLoading(false)
       console.error('Error uploading file:', error)
       console.log('5')
+      toast.error(error)
     }
     setTimeout(() => {
       getList(
@@ -53,8 +62,7 @@ const FileUpload = ({
       </p>
       <form onSubmit={handleSubmit}>
         <div>
-          <button type="submit">Upload</button>
-          <label className="file-upload-label">
+          <label className={classes.button}>
             Choose file
             <input
               type="file"
@@ -62,9 +70,16 @@ const FileUpload = ({
               onChange={(e) => setFile((prev) => e.target.files[0])}
             />
           </label>
-          <h4 className="file-upload-name">
+          <h4 className={classes.label}>
             {!file.name ? 'Waiting for file' : file.name}
           </h4>
+          <button
+            className={classes.button}
+            type="submit"
+            disabled={loading || !file}
+          >
+            {loading ? 'Please Wait...' : 'Upload'}
+          </button>
         </div>
       </form>
     </div>

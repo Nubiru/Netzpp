@@ -1,32 +1,32 @@
-import express from 'express'
-import { uploadController } from '../controllers/uploadConroller.js'
-import multer from 'multer'
-const router = express.Router()
+import express from "express";
+import { uploadController } from "../controllers/uploadConroller.js";
+import multer from "multer";
+const router = express.Router();
 
-const storage = multer.memoryStorage()
-const upload = multer({ storage })
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
-router.post('/', upload.single('file'), (req, res) => {
+router.post("/", upload.single("file"), (req, res) => {
   try {
     if (
       req.body.customerFolder == null &&
       req.body.subFolder == null &&
       req.file == null
     ) {
-      res.json('Data error')
+      res.json("Data error");
     } else {
       const result = uploadController(
         req.body.customerFolder,
         req.body.subFolder,
         req.file
-      )
-      console.log(result)
-      res.json({ message: 'File uploaded successfully', file: req.file })
+      );
+      console.log(result);
+      res.json({ message: "File uploaded successfully", file: req.file });
     }
   } catch (err) {
-    console.log(err)
-    res.json('File error')
+    console.log(err);
+    res.json("File error");
   }
-})
+});
 
-export default router
+export default router;

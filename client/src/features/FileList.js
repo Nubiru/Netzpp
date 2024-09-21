@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
-import { FaArrowLeft } from 'react-icons/fa6'
-import { getList } from '../helpers/getList.js'
-import classes from './FileList.module.css'
+import { useState, useEffect } from "react";
+import { FaArrowLeft } from "react-icons/fa6";
+import { getList } from "../helpers/getList.js";
+import classes from "./FileList.module.css";
 
 const FileList = ({
   files,
@@ -9,9 +9,9 @@ const FileList = ({
   folders,
   setFolders,
   folderPath,
-  setFolderPath
+  setFolderPath,
 }) => {
-  const [downloadURL, setDownloadURL] = useState('')
+  const [downloadURL, setDownloadURL] = useState("");
 
   useEffect(() => {
     getList(
@@ -20,31 +20,33 @@ const FileList = ({
       folderPath.customerFolder,
       folderPath.subFolder,
       setFolderPath
-    )
-  }, [folderPath])
+    );
+  }, [folderPath]);
 
   const handleChangeAdminBack = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setFolderPath({
-      customerFolder: '',
-      subFolder: ''
-    })
-  }
+      customerFolder: "",
+      subFolder: "",
+    });
+  };
 
   return (
     <>
       <div>
         {folders}
+
         {/* should be mapped, li created, key per item */}
         {files}
         {/* Add option to view file in new tab when clicking, using useRef hook */}
       </div>
+
       <div className={classes.arrowContainer}>
         <FaArrowLeft onClick={(e) => handleChangeAdminBack(e)} />
         Admin Back
       </div>
     </>
-  )
-}
+  );
+};
 
-export default FileList
+export default FileList;

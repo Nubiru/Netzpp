@@ -1,14 +1,14 @@
-import { FaArrowLeft } from 'react-icons/fa6'
-import classes from './BackArrow.module.css'
+import { FaArrowLeft } from "react-icons/fa6";
+import classes from "./BackArrow.module.css";
 
 const BackArrow = ({ folderPath, setFolderPath }) => {
   const handleChangeBack = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setFolderPath({
-      customerFolder: folderPath.customerFolder || 'General',
-      subFolder: ''
-    })
-  }
+      customerFolder: folderPath.customerFolder || "General",
+      subFolder: "",
+    });
+  };
 
   return (
     <div className={classes.container}>
@@ -18,7 +18,7 @@ const BackArrow = ({ folderPath, setFolderPath }) => {
       />
       <p className={classes.navText}>Go back</p>
     </div>
-  )
-}
+  );
+};
 
-export default BackArrow
+export default BackArrow;
